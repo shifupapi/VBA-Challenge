@@ -1,104 +1,81 @@
-# VBA-Challenge
-Sub stockmarket()
+# VBA Homework: The VBA of Wall Street
 
-Dim ws As Worksheet
-'For Each ws In Workbooks
-'ws.Active
+## Background
 
-'fill out headers
- Range("I1").EntireColumn.Insert
- Range("I1").Value = "Ticker"
- Range("J1").EntireColumn.Insert
- Range("J1").Value = "yearly_change"
- Range("K1").EntireColumn.Insert
- Range("K1").Value = "percent_change"
- Range("L1").EntireColumn.Insert
- Range("L1").Value = "total _stock_volume"
- Range("Q2").Value = "Greastest % Increase"
- Range("Q3").Value = "Greastest % Decrease"
- Range("Q4").Value = "Greastest Total Volume"
- Range("R1").Value = "Ticker"
- Range("S1").Value = "Value"
+You are well on your way to becoming a programmer and Excel master! In this homework assignment, you will use VBA scripting to analyze generated stock market data. Depending on your comfort level with VBA, you may choose to challenge yourself with a few of the challenge tasks.
 
+### Before You Begin
 
- 'define variables
+1. Create a new repository for this project called `VBA-challenge`. **Do not add this homework to an existing repository**.
 
- Dim ticker As String
- Dim Summary_Table_Row As Integer
- Dim open_price As Double
- Dim close_price As Double
- Dim number_tickers As Double
- Dim yearly_change As Double
- Dim percnt_change As Double
- Dim total_stock_volume As Double
- Dim i As Double
- Dim Greatest_Percentage_Increase As Double
- Dim Greastest_Percentage_Decrease As Double
- Dim Greatest_Total_Volume As Double
- Dim last_row As Long
- Dim Percentage As Double
+2. Inside the new repository that you just created, add any VBA files that you use for this assignment. These will be the main scripts to run for each analysis.
 
+### Files
 
- 'set initial values
-   ticker = 0
-   yearly_change = 0
-   open_price = 0
-   close_price = 0
-   Percent_Change = 0
-   total_stock_volume = 0
-   number_tickers = 0
+* [Test Data](Resources/alphabetical_testing.xlsx) - Use this while developing your scripts.
 
-  last_row = Cells(Rows.Count, 1).End(xlUp).Row
-   Summary_Table_Row = 2
+* [Stock Data](Resources/Multiple_year_stock_data.xlsx) - Run your scripts on this data to generate the final homework report.
 
-   'Loop through all Tickers
-   For i = 2 To last_row
+### Stock Market Analyst
 
+![alt=""](Images/stockmarket.jpg)
 
-  If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
+## Instructions
 
-  ticker = Cells(i, 1).Value
+Create a script that loops through all the stocks for one year and outputs the following information:
 
-  Range("I" & Summary_Table_Row).Value = ticker
+  * The ticker symbol.
 
- total_stock_volume = total_stock_volume + Cells(i, 7).Value
+  * Yearly change from opening price at the beginning of a given year to the closing price at the end of that year.
 
- Range("L" & Summary_Table_Row).Value = total_stock_volume
- total_stock_volume = 0
+  * The percent change from opening price at the beginning of a given year to the closing price at the end of that year.
 
+  * The total stock volume of the stock.=
 
- Summary_Table_Row = Summary_Table_Row + 1
- Else
- total_stock_volume = total_stock_volume + Cells(i, 7).Value
- End If
- 
- If open_price = 0 Then
+**Note:** Make sure to use conditional formatting that will highlight positive change in green and negative change in red.
 
-  open_price = Cells(i, 3).Value
+The result should match the following image:
 
-  End If
+![moderate_solution](Images/moderate_solution.png)
 
-close_price = Cells(i, 6).Value
+## Bonus
 
+Add functionality to your script to return the stock with the "Greatest % increase", "Greatest % decrease", and "Greatest total volume". The solution should match the following image:
 
-'Calculate yearly change
-    yearly_change = close_price - open_price
-    Range("J" & Summary_Table_Row).Value = yearly_change
+![hard_solution](Images/hard_solution.png)
 
-    'Calculate Percent Change column
-    Percent_Change = FormatPercent((close_price / open_price) - 1)
-    Range("K" & Summary_Table_Row).Value = Percent_Change
+Make the appropriate adjustments to your VBA script to allow it to run on every worksheet (that is, every year) just by running the VBA script once.
 
-If yearly_change >= 0 Then
-Range("J" & Summary_Table_Row).Interior.ColorIndex = 4
-Else
-Range("J" & Summary_Table_Row).Interior.ColorIndex = 3
-End If
+## Other Considerations
 
+* Use the sheet `alphabetical_testing.xlsx` while developing your code. This data set is smaller and will allow you to test faster. Your code should run on this file in less than 3 to 5 minutes.
 
- Next i
+* Make sure that the script acts the same on every sheet. The joy of VBA is that it takes the tediousness out of repetitive tasks with one click of a button.
 
+* Some assignments, like this one, contain a bonus. It is possible to achieve proficiency for this assignment without completing the bonus. The bonus is an opportunity to further develop your skills and be rewarded extra points for doing so.
 
+## Submission
 
- End Sub
+To submit, please upload the following to GitHub:
+
+  * A screen shot for each year of your results on the multi-year stock data.
+
+  * VBA scripts as separate files.
+
+Be sure to commit regularly to your repository and that it contains a README.md file.
+
+After saving your work, create a shareable link and submit the link to <https://bootcampspot-v2.com/>.
+
+## Rubric
+
+[Unit 2 Rubric - VBA Homework - The VBA of Wall Street](https://docs.google.com/document/d/1OjDM3nyioVQ6nJkqeYlUK7SxQ3WZQvvV3T9MHCbnoWk/edit?usp=sharing)
+
+## References
+
+* Dataset generated by Trilogy Education Services, LLC.
+
+- - -
+
+© 2022 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
+
 
